@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutina de Espalda Definitiva - BEFITT</title>
+    <style>
+        /* Estilos Globales - Estética BEFITT (Oscuro y Rojo) */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d0d;
+            background-image: radial-gradient(circle at top, #1a0808 0%, #0d0d0d 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 51, 51, 0.15);
+            border-radius: 16px;
+            max-width: 480px;
+            width: 100%;
+            padding: 30px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Badge superior */
+        .badge {
+            display: inline-block;
+            border: 1px solid #ff3333;
+            color: #ff3333;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        /* Avatar de Benjamín */
+        .profile-container {
+            margin-bottom: 16px;
+        }
+
+        .profile-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid #ff3333;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+        }
+
+        .author-name {
+            color: #a0a0a0;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Títulos */
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        h1 span {
+            color: #ff3333;
+        }
+
+        p.subtitle {
+            color: #d0d0d0;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        p.target-audience {
+            color: #a0a0a0;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            border-left: 2px solid #ff3333;
+            padding-left: 10px;
+            text-align: left;
+        }
+
+        /* Barra de Progreso */
+        .progress-container {
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            background-color: #222;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background-color: #ff3333;
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            box-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
+        }
+
+        /* Botones */
+        .btn {
+            background-color: #ff3333;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #e62e2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Estructura de Pasos (Interactivo) */
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .error-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff3333;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .error-desc {
+            font-size: 15px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Badge Fijo -->
+        <div class="badge">Guía Gratuita · Team BEFITT</div>
+
+        <!-- Autor Fijo -->
+        <div class="profile-container">
+            <img class="profile-img" src="perfil.jpg" alt="Benjamín Salas">
+        </div>
+        <div class="author-name">Benjamín Salas · Coach Fitness Online</div>
+
+        <!-- PASO 0: Pantalla de Bienvenida -->
+        <div id="step-0" class="step active">
+            <h1>La rutina que me ayudó a <span>crecer la espalda</span></h1>
+            <p class="subtitle">Descubre el enfoque científico y práctico para dejar atrás una espalda plana y construir una silueta imponente en V.</p>
+            <p class="target-audience">Especialmente diseñado para hombres que se sienten acomplejados por su espalda estrecha y buscan un cambio físico real.</p>
+            
+            <button class="btn" onclick="nextStep()">Ver la estrategia →</button>
+        </div>
+
+        <!-- PASO 1: Clave 1 -->
+        <div id="step-1" class="step">
+            <div class="error-title">Paso 1: El Doble Enfoque Obligatorio</div>
+            <p class="error-desc">Para tener una espalda enorme no basta con tirar peso sin rumbo. Debes estructurar tu rutina atacando directamente dos factores cruciales: la <strong>amplitud</strong> (anchura) y la <strong>densidad</strong> (grosor).</p>
+            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
+        </div>
+
+        <!-- PASO 2: Clave 2 -->
+        <div id="step-2" class="step">
+            <div class="error-title">Paso 2: Desarrollando la Amplitud</div>
+            <p class="error-desc">Para ganar anchura debes estimular los dorsales mediante dos movimientos clave: la <strong>extensión</strong> y la <strong>abducción de hombro</strong>. Añade a tu rutina un Remo Alto con agarre neutro para la extensión, y un Pulldown para la abducción.</p>
+            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
+        </div>
+
+        <!-- PASO 3: Clave 3 -->
+        <div id="step-3" class="step">
+            <div class="error-title">Paso 3: Construyendo Densidad (Grosor)</div>
+            <p class="error-desc">Para una espalda con aspecto rocoso y grueso de perfil, necesitas un remo que exija una máxima <strong>protracción y retracción escapular</strong>. Ejercicios como el <strong>Remo en T</strong> son perfectos para dominar este movimiento.</p>
+            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
+        </div>
+
+        <!-- PASO 4: Clave 4 -->
+        <div id="step-4" class="step">
+            <div class="error-title">Paso 4: Los Erectores Espinales</div>
+            <p class="error-desc">La zona baja es el soporte de tu postura. Realiza ejercicios de <strong>bisagra de cadera pesados</strong> (como el peso muerto o extensiones de tronco) buscando una activación directa de los erectores espinales para completar tu desarrollo.</p>
+            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
+        </div>
+
+        <!-- PASO 5: Clave 5 -->
+        <div id="step-5" class="step">
+            <div class="error-title">Paso 5: Consistencia y Tips Diarios</div>
+            <p class="error-desc">Entrenar de forma inteligente marca la diferencia entre estancarte y ver cambios semana a semana. <strong>Sígueme en mis redes sociales</strong> para no perderte ningún tip de entrenamiento y nutrición científica.</p>
+            <button class="btn" onclick="nextStep()">Ver Resultados →</button>
+        </div>
+
+        <!-- PASO 6: Pantalla Final de Captación (CTA) -->
+        <div id="step-6" class="step">
+            <h1>¿Listo para transformar tu espalda?</h1>
+            <p class="subtitle">Ya tienes las bases de la rutina que funciona científicamente.</p>
+            <p class="error-desc" style="text-align: center;">Si sientes que te cuesta hacer crecer tu espalda o no sabes cómo adaptar esto a tu nivel actual, hablemos. Escríbeme a WhatsApp y yo te ayudo a solucionarlo.</p>
+            
+            <!-- Reemplaza el número de abajo (569XXXXXXXX) por tu WhatsApp real -->
+            <a href="https://wa.me/569XXXXXXXX?text=Hola%20Benjamín,%20vi%20la%20guía%20de%20espalda.%20Tengo%20problemas%20para%20hacerla%20crecer%20y%20me%20gustaría%20que%20me%20ayudes." class="btn btn-whatsapp" target="_blank">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: -2px;">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.977h.004c4.368 0 7.926-3.559 7.93-7.93a7.897 7.897 0 0 0-2.333-5.618zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.98c-.202-.101-1.194-.588-1.378-.653-.182-.066-.315-.099-.445.099-.133.197-.513.653-.629.78-.117.133-.232.148-.434.05-2.01-.101-3.303-.94-4.1-2.315-.21-.361.21-.336.6-.112.108.062.201.111.201.111s.052.028.09.074c.082.096.082.204.04.308-.04.104-.18.423-.274.651-.096.23-.2.197-.274.197-.074-.001-.159-.001-.243-.001a1.21 1.21 0 0 0-.878.408c-.297.33-1.134 1.109-1.134 2.7 0 1.59 1.157 3.12 1.319 3.325.163.205 2.279 3.481 5.519 4.88.77.331 1.372.528 1.843.678.775.245 1.48.21 2.036.128.621-.093 1.194-.489 1.378-1.005.182-.515.182-.958.128-1.05-.054-.093-.202-.147-.404-.248z"/>
+                </svg>
+                Quiero que me ayudes
+            </a>
+        </div>
+
+        <!-- Indicador de Progreso Dinámico -->
+        <div class="progress-container" id="progress-container">
+            <div class="progress-text">
+                <span>Tu progreso</span>
+                <span id="progress-label">0 / 5 revisados</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const totalErrors = 5;
+
+        function nextStep() {
+            // Ocultar paso actual
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            // Avanzar
+            currentStep++;
+            
+            // Mostrar nuevo paso
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+
+            // Actualizar barra de progreso
+            const progressBar = document.getElementById('progress-bar');
+            const progressLabel = document.getElementById('progress-label');
+            const progressContainer = document.getElementById('progress-container');
+
+            if (currentStep > 0 && currentStep <= totalErrors) {
+                const percentage = (currentStep / totalErrors) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressLabel.innerText = `${currentStep} / ${totalErrors} revisados`;
+            } else if (currentStep > totalErrors) {
+                // Si llegamos al final, ocultamos la barra de progreso
+                progressContainer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
