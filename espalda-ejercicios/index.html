@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rutina de Espalda Definitiva - BEFITT</title>
     <style>
-        /* Estilos Globales - Estética BEFITT (Oscuro y Rojo) */
+        /* Estilos Globales - Estética Premium BEFITT */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,72 +14,92 @@
         }
 
         body {
-            background-color: #0d0d0d;
-            background-image: radial-gradient(circle at top, #1a0808 0%, #0d0d0d 100%);
+            background-color: #080808;
             color: #ffffff;
+            padding: 24px 16px 100px 16px; /* Espacio extra abajo por el botón flotante */
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
 
-        .card {
-            background-color: rgba(20, 20, 20, 0.8);
-            border: 1px solid rgba(255, 51, 51, 0.15);
-            border-radius: 16px;
-            max-width: 480px;
+        .container {
+            max-width: 550px;
             width: 100%;
-            padding: 30px 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            backdrop-filter: blur(10px);
         }
 
-        /* Badge superior */
+        /* 1. Encabezado Fijo */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #ff3333;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 11px;
+            color: #8e8e93;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .brand-subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .logo-placeholder {
+            background: #1c1c1e;
+            border: 1px solid #2c2c2e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #ff3333;
+        }
+
+        /* Badge Estilizado */
         .badge {
-            display: inline-block;
-            border: 1px solid #ff3333;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 51, 51, 0.1);
+            border: 1px solid rgba(255, 51, 51, 0.2);
             color: #ff3333;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 6px 16px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-        }
-
-        /* Avatar de Benjamín */
-        .profile-container {
-            margin-bottom: 16px;
-        }
-
-        .profile-img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 2px solid #ff3333;
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
-        }
-
-        .author-name {
-            color: #a0a0a0;
-            font-size: 12px;
-            font-weight: 600;
             letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
         }
 
         /* Títulos */
         h1 {
-            font-size: 26px;
+            font-size: 32px;
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 16px;
-            text-transform: uppercase;
+            margin-bottom: 12px;
             letter-spacing: -0.5px;
         }
 
@@ -87,233 +107,592 @@
             color: #ff3333;
         }
 
-        p.subtitle {
-            color: #d0d0d0;
+        .subtitle-desc {
+            color: #8e8e93;
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* 2. Widget del Score Dinámico */
+        .score-card {
+            background: #121212;
+            border: 1px solid #1c1c1e;
+            border-radius: 18px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .score-circle-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+        }
+
+        .score-circle-svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: #1c1c1e;
+            stroke-width: 8;
+        }
+
+        .circle-progress {
+            fill: none;
+            stroke: #ff3333;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 251.2;
+            stroke-dashoffset: 251.2; /* Animado dinámicamente */
+            transition: stroke-dashoffset 0.4s ease;
+        }
+
+        .score-inner-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .score-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .score-label {
+            font-size: 8px;
+            color: #8e8e93;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .score-info {
+            flex: 1;
+        }
+
+        .score-info-title {
+            font-size: 11px;
+            color: #ff3333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .score-info-desc {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        /* 3. Módulos de Hábitos/Pasos */
+        .module-card {
+            background: #121212;
+            border: 1px solid #1c1c1e;
+            border-radius: 18px;
+            padding: 24px;
             margin-bottom: 24px;
         }
 
-        p.target-audience {
-            color: #a0a0a0;
-            font-size: 13px;
-            font-style: italic;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            border-left: 2px solid #ff3333;
-            padding-left: 10px;
-            text-align: left;
-        }
-
-        /* Barra de Progreso */
-        .progress-container {
-            margin: 24px 0;
-            text-align: left;
-        }
-
-        .progress-text {
+        .module-header {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
-            color: #a0a0a0;
-            margin-bottom: 8px;
-            font-weight: 600;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
-        .progress-bar-bg {
-            background-color: #222;
-            height: 6px;
-            border-radius: 3px;
-            overflow: hidden;
+        .module-tag-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .progress-bar-fill {
-            background-color: #ff3333;
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s ease;
-            box-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
+        .module-icon {
+            background: rgba(255, 51, 51, 0.1);
+            color: #ff3333;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
         }
 
-        /* Botones */
-        .btn {
-            background-color: #ff3333;
-            color: #ffffff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
+        .module-meta {
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 700;
+            color: #ff3333;
+            letter-spacing: 0.5px;
+        }
+
+        .module-count {
+            font-size: 11px;
+            background: #1c1c1e;
+            color: #8e8e93;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .module-desc {
+            font-size: 14px;
+            color: #8e8e93;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Inputs interactivos (Estilo Checklist) */
+        .option-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: #1c1c1e;
+            border: 1px solid #2c2c2e;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .option-row:hover {
+            border-color: rgba(255, 51, 51, 0.4);
+        }
+
+        .option-row.checked {
+            background: rgba(255, 51, 51, 0.04);
+            border-color: #ff3333;
+        }
+
+        /* Checkbox customizado */
+        .checkbox-container {
+            position: relative;
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: transparent;
+            border: 2px solid #3a3a3c;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .option-row.checked .checkmark {
+            background-color: #ff3333;
+            border-color: #ff3333;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .option-row.checked .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-container .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .option-text {
+            font-size: 14px;
+            color: #d1d1d6;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .option-row.checked .option-text {
+            color: #ffffff;
+        }
+
+        /* 4. Caja Final de Cierre (CTA) */
+        .cta-card {
+            background: #ff3333;
+            color: #ffffff;
+            border-radius: 22px;
+            padding: 32px 24px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .cta-meta {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .cta-title {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .cta-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .btn-white {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 16px 28px;
+            font-size: 15px;
+            font-weight: 800;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
             display: inline-flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
         }
 
-        .btn:hover {
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 5. Botón Flotante de WhatsApp */
+        .sticky-btn-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 550px;
+            z-index: 1000;
+        }
+
+        .btn-floating {
+            background-color: #ff3333;
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 30px;
+            width: 100%;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(255, 51, 51, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-floating:hover {
             background-color: #e62e2e;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
-        }
-
-        .btn-whatsapp {
-            background-color: #25d366;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #20ba5a;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        /* Estructura de Pasos (Interactivo) */
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .error-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ff3333;
-            margin-bottom: 12px;
-            text-align: left;
-        }
-
-        .error-desc {
-            font-size: 15px;
-            color: #e0e0e0;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            text-align: left;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- Badge Fijo -->
-        <div class="badge">Guía Gratuita · Team BEFITT</div>
+    <div class="container">
+        
+        <!-- 1. Encabezado -->
+        <header class="header">
+            <div class="profile-area">
+                <img class="profile-img" src="perfil.jpg" alt="Benjamín Salas">
+                <div class="profile-info">
+                    <span class="author-name">Benjamín Salas</span>
+                    <span class="brand-subtitle">Team BEFITT</span>
+                </div>
+            </div>
+            <div class="logo-placeholder">BEFITT</div>
+        </header>
 
-        <!-- Autor Fijo -->
-        <div class="profile-container">
-            <img class="profile-img" src="perfil.jpg" alt="Benjamín Salas">
+        <!-- Presentación Principal -->
+        <div class="badge">Estrategia Interactiva</div>
+        <h1>La rutina que me ayudó a <span>crecer la espalda</span></h1>
+        <p class="subtitle-desc">El plan anatómico y biomecánico diseñado específicamente para hombres cansados de verse estrechos y listos para construir una espalda masiva en V.</p>
+
+        <!-- 2. Widget de Score Dinámico -->
+        <div class="score-card">
+            <div class="score-circle-container">
+                <svg class="score-circle-svg">
+                    <circle class="circle-bg" cx="45" cy="45" r="40"></circle>
+                    <circle id="progressCircle" class="circle-progress" cx="45" cy="45" r="40"></circle>
+                </svg>
+                <div class="score-inner-text">
+                    <div id="scorePercent" class="score-number">0%</div>
+                    <div class="score-label">Rutina</div>
+                </div>
+            </div>
+            <div class="score-info">
+                <div class="score-info-title">Tu Progreso Hoy</div>
+                <div class="score-info-desc">Completa tus pilares para desbloquear la espalda en V.</div>
+            </div>
         </div>
-        <div class="author-name">Benjamín Salas · Coach Fitness Online</div>
 
-        <!-- PASO 0: Pantalla de Bienvenida -->
-        <div id="step-0" class="step active">
-            <h1>La rutina que me ayudó a <span>crecer la espalda</span></h1>
-            <p class="subtitle">Descubre el enfoque científico y práctico para dejar atrás una espalda plana y construir una silueta imponente en V.</p>
-            <p class="target-audience">Especialmente diseñado para hombres que se sienten acomplejados por su espalda estrecha y buscan un cambio físico real.</p>
+        <!-- 3. Módulos de Hábitos / Checklist -->
+        
+        <!-- Módulo 1 -->
+        <section class="module-card">
+            <div class="module-header">
+                <div class="module-tag-group">
+                    <span class="module-icon">1</span>
+                    <span class="module-meta">Pilar Estructural</span>
+                </div>
+                <span class="module-count">1/2</span>
+            </div>
+            <h2 class="module-title">El Doble Enfoque Obligatorio</h2>
+            <p class="module-desc">Para tener una espalda enorme no basta con tirar peso sin rumbo. Debes estructurar tu rutina atacando directamente dos factores cruciales:</p>
             
-            <button class="btn" onclick="nextStep()">Ver la estrategia →</button>
-        </div>
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Amplitud:</strong> Enfocarte en que la espalda se vea más ancha desde el frente y los lados.</div>
+            </div>
 
-        <!-- PASO 1: Clave 1 -->
-        <div id="step-1" class="step">
-            <div class="error-title">Paso 1: El Doble Enfoque Obligatorio</div>
-            <p class="error-desc">Para tener una espalda enorme no basta con tirar peso sin rumbo. Debes estructurar tu rutina atacando directamente dos factores cruciales: la <strong>amplitud</strong> (anchura) y la <strong>densidad</strong> (grosor).</p>
-            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
-        </div>
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Densidad:</strong> Ganar grosor, relieve y un aspecto rocoso en la zona media y alta.</div>
+            </div>
+        </section>
 
-        <!-- PASO 2: Clave 2 -->
-        <div id="step-2" class="step">
-            <div class="error-title">Paso 2: Desarrollando la Amplitud</div>
-            <p class="error-desc">Para ganar anchura debes estimular los dorsales mediante dos movimientos clave: la <strong>extensión</strong> y la <strong>abducción de hombro</strong>. Añade a tu rutina un Remo Alto con agarre neutro para la extensión, y un Pulldown para la abducción.</p>
-            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
-        </div>
-
-        <!-- PASO 3: Clave 3 -->
-        <div id="step-3" class="step">
-            <div class="error-title">Paso 3: Construyendo Densidad (Grosor)</div>
-            <p class="error-desc">Para una espalda con aspecto rocoso y grueso de perfil, necesitas un remo que exija una máxima <strong>protracción y retracción escapular</strong>. Ejercicios como el <strong>Remo en T</strong> son perfectos para dominar este movimiento.</p>
-            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
-        </div>
-
-        <!-- PASO 4: Clave 4 -->
-        <div id="step-4" class="step">
-            <div class="error-title">Paso 4: Los Erectores Espinales</div>
-            <p class="error-desc">La zona baja es el soporte de tu postura. Realiza ejercicios de <strong>bisagra de cadera pesados</strong> (como el peso muerto o extensiones de tronco) buscando una activación directa de los erectores espinales para completar tu desarrollo.</p>
-            <button class="btn" onclick="nextStep()">Siguiente Paso →</button>
-        </div>
-
-        <!-- PASO 5: Clave 5 -->
-        <div id="step-5" class="step">
-            <div class="error-title">Paso 5: Consistencia y Tips Diarios</div>
-            <p class="error-desc">Entrenar de forma inteligente marca la diferencia entre estancarte y ver cambios semana a semana. <strong>Sígueme en mis redes sociales</strong> para no perderte ningún tip de entrenamiento y nutrición científica.</p>
-            <button class="btn" onclick="nextStep()">Ver Resultados →</button>
-        </div>
-
-        <!-- PASO 6: Pantalla Final de Captación (CTA) -->
-        <div id="step-6" class="step">
-            <h1>¿Listo para transformar tu espalda?</h1>
-            <p class="subtitle">Ya tienes las bases de la rutina que funciona científicamente.</p>
-            <p class="error-desc" style="text-align: center;">Si sientes que te cuesta hacer crecer tu espalda o no sabes cómo adaptar esto a tu nivel actual, hablemos. Escríbeme a WhatsApp y yo te ayudo a solucionarlo.</p>
+        <!-- Módulo 2 -->
+        <section class="module-card">
+            <div class="module-header">
+                <div class="module-tag-group">
+                    <span class="module-icon">2</span>
+                    <span class="module-meta">Amplitud (Anchura)</span>
+                </div>
+                <span class="module-count">2/2</span>
+            </div>
+            <h2 class="module-title">Estimulación del Dorsal Ancho</h2>
+            <p class="module-desc">Para ganar anchura debes someter al dorsal a sus dos movimientos mecánicos naturales:</p>
             
-            <!-- Reemplaza el número de abajo (569XXXXXXXX) por tu WhatsApp real -->
-            <a href="https://wa.me/569XXXXXXXX?text=Hola%20Benjamín,%20vi%20la%20guía%20de%20espalda.%20Tengo%20problemas%20para%20hacerla%20crecer%20y%20me%20gustaría%20que%20me%20ayudes." class="btn btn-whatsapp" target="_blank">
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Extensión de hombro:</strong> Trabajo con agarre cerrado o neutro (Ej: Remo Alto en Polea con agarre estrecho).</div>
+            </div>
+
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Abducción de hombro:</strong> Tirones verticales desde arriba (Ej: Lat Pulldown o dominadas pronas).</div>
+            </div>
+        </section>
+
+        <!-- Módulo 3 -->
+        <section class="module-card">
+            <div class="module-header">
+                <div class="module-tag-group">
+                    <span class="module-icon">3</span>
+                    <span class="module-meta">Densidad (Grosor)</span>
+                </div>
+                <span class="module-count">1/1</span>
+            </div>
+            <h2 class="module-title">Movimiento Escapular Completo</h2>
+            <p class="module-desc">El secreto para una espalda gruesa está en los trapecios y romboides a través del control de tus escápulas:</p>
+            
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Protracción y retracción:</strong> Ejercicios pesados de tracción horizontal como el <strong>Remo en T</strong>, dejando que tus hombros viajen hacia adelante y apretando fuerte atrás.</div>
+            </div>
+        </section>
+
+        <!-- Módulo 4 -->
+        <section class="module-card">
+            <div class="module-header">
+                <div class="module-tag-group">
+                    <span class="module-icon">4</span>
+                    <span class="module-meta">Soporte Lumbar</span>
+                </div>
+                <span class="module-count">1/1</span>
+            </div>
+            <h2 class="module-title">Fortalecer los Erectores Espinales</h2>
+            <p class="module-desc">La base de tu postura y el "árbol de navidad" en tu espalda baja requiere trabajo de bisagra:</p>
+            
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Bisagra de cadera pesada:</strong> Ejecutar movimientos estables como Peso Muerto Rumano, Buenos Días o Hiperextensiones para activar intensamente la cadena posterior.</div>
+            </div>
+        </section>
+
+        <!-- Módulo 5 -->
+        <section class="module-card">
+            <div class="module-header">
+                <div class="module-tag-group">
+                    <span class="module-icon">5</span>
+                    <span class="module-meta">Paso Final</span>
+                </div>
+                <span class="module-count">1/1</span>
+            </div>
+            <h2 class="module-title">Consistencia y Tips Diarios</h2>
+            <p class="module-desc">La biomecánica es el primer paso. El segundo es la constancia absoluta:</p>
+            
+            <div class="option-row" onclick="toggleOption(this)">
+                <div class="checkbox-container">
+                    <input type="checkbox" onchange="calculateScore()">
+                    <span class="checkmark"></span>
+                </div>
+                <div class="option-text"><strong>Comunidad BEFITT:</strong> Sígueme en mis redes sociales para recibir recordatorios diarios de cómo optimizar tu entrenamiento científico.</div>
+            </div>
+        </section>
+
+        <!-- 4. Caja Final de Cierre (CTA) -->
+        <section class="cta-card">
+            <div class="cta-meta">Método BEFITT</div>
+            <h2 class="cta-title">¿Tienes problemas para hacer crecer tu espalda?</h2>
+            <p class="cta-desc">Ya sabes exactamente qué movimientos necesitas integrar. Si quieres que diseñemos juntos tu rutina personalizada para desbloquear de una vez por todas tu espalda en V, hablemos por WhatsApp hoy mismo.</p>
+            
+            <!-- Reemplaza el número de abajo (569XXXXXXXX) con tu número real de WhatsApp -->
+            <a href="https://wa.me/569XXXXXXXX?text=Hola%20Benjamín,%20completé%20el%20test%20de%20espalda.%20Tengo%20problemas%20para%20hacerla%20crecer%20y%20quiero%20que%20me%20ayudes." class="btn-white" target="_blank">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: -2px;">
                     <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.977h.004c4.368 0 7.926-3.559 7.93-7.93a7.897 7.897 0 0 0-2.333-5.618zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.98c-.202-.101-1.194-.588-1.378-.653-.182-.066-.315-.099-.445.099-.133.197-.513.653-.629.78-.117.133-.232.148-.434.05-2.01-.101-3.303-.94-4.1-2.315-.21-.361.21-.336.6-.112.108.062.201.111.201.111s.052.028.09.074c.082.096.082.204.04.308-.04.104-.18.423-.274.651-.096.23-.2.197-.274.197-.074-.001-.159-.001-.243-.001a1.21 1.21 0 0 0-.878.408c-.297.33-1.134 1.109-1.134 2.7 0 1.59 1.157 3.12 1.319 3.325.163.205 2.279 3.481 5.519 4.88.77.331 1.372.528 1.843.678.775.245 1.48.21 2.036.128.621-.093 1.194-.489 1.378-1.005.182-.515.182-.958.128-1.05-.054-.093-.202-.147-.404-.248z"/>
                 </svg>
-                Quiero que me ayudes
+                Hablar por WhatsApp
             </a>
-        </div>
+        </section>
 
-        <!-- Indicador de Progreso Dinámico -->
-        <div class="progress-container" id="progress-container">
-            <div class="progress-text">
-                <span>Tu progreso</span>
-                <span id="progress-label">0 / 5 revisados</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-bar"></div>
-            </div>
-        </div>
     </div>
 
+    <!-- 5. Botón Flotante Fijo -->
+    <div class="sticky-btn-container">
+        <!-- Reemplaza el número de abajo (569XXXXXXXX) con tu número real de WhatsApp -->
+        <a href="https://wa.me/569XXXXXXXX?text=Hola%20Benjamín,%20vengo%20de%20la%20guía%20de%20espalda.%20Tengo%20problemas%20para%20hacerla%20crecer%20y%20quiero%20tu%20ayuda." class="btn-floating" target="_blank">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: -1px;">
+                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.977h.004c4.368 0 7.926-3.559 7.93-7.93a7.897 7.897 0 0 0-2.333-5.618zM7.994 14.52a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.98c-.202-.101-1.194-.588-1.378-.653-.182-.066-.315-.099-.445.099-.133.197-.513.653-.629.78-.117.133-.232.148-.434.05-2.01-.101-3.303-.94-4.1-2.315-.21-.361.21-.336.6-.112.108.062.201.111.201.111s.052.028.09.074c.082.096.082.204.04.308-.04.104-.18.423-.274.651-.096.23-.2.197-.274.197-.074-.001-.159-.001-.243-.001a1.21 1.21 0 0 0-.878.408c-.297.33-1.134 1.109-1.134 2.7 0 1.59 1.157 3.12 1.319 3.325.163.205 2.279 3.481 5.519 4.88.77.331 1.372.528 1.843.678.775.245 1.48.21 2.036.128.621-.093 1.194-.489 1.378-1.005.182-.515.182-.958.128-1.05-.054-.093-.202-.147-.404-.248z"/>
+            </svg>
+            Chatear por WhatsApp
+        </a>
+    </div>
+
+    <!-- Script Lógico para el Score de Compromiso -->
     <script>
-        let currentStep = 0;
-        const totalErrors = 5;
-
-        function nextStep() {
-            // Ocultar paso actual
-            document.getElementById(`step-${currentStep}`).classList.remove('active');
+        function toggleOption(row) {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
             
-            // Avanzar
-            currentStep++;
-            
-            // Mostrar nuevo paso
-            document.getElementById(`step-${currentStep}`).classList.add('active');
-
-            // Actualizar barra de progreso
-            const progressBar = document.getElementById('progress-bar');
-            const progressLabel = document.getElementById('progress-label');
-            const progressContainer = document.getElementById('progress-container');
-
-            if (currentStep > 0 && currentStep <= totalErrors) {
-                const percentage = (currentStep / totalErrors) * 100;
-                progressBar.style.width = `${percentage}%`;
-                progressLabel.innerText = `${currentStep} / ${totalErrors} revisados`;
-            } else if (currentStep > totalErrors) {
-                // Si llegamos al final, ocultamos la barra de progreso
-                progressContainer.style.display = 'none';
+            if (checkbox.checked) {
+                row.classList.add('checked');
+            } else {
+                row.classList.remove('checked');
             }
+            calculateScore();
         }
+
+        // Evita que al dar clic directo al checkbox se llame dos veces la función
+        document.querySelectorAll('.checkbox-container input').forEach(input => {
+            input.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+            input.addEventListener('change', (e) => {
+                const row = e.target.closest('.option-row');
+                if (e.target.checked) {
+                    row.classList.add('checked');
+                } else {
+                    row.classList.remove('checked');
+                }
+                calculateScore();
+            });
+        });
+
+        function calculateScore() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = checkboxes.length;
+            let checkedCount = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    checkedCount++;
+                }
+            });
+
+            const percent = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+            
+            // Actualizar texto del Score
+            document.getElementById('scorePercent').innerText = percent + "%";
+
+            // Actualizar gráfico circular (SVG Dash Offset)
+            // Radio r = 40, circunferencia = 2 * Math.PI * r = ~251.2
+            const circle = document.getElementById('progressCircle');
+            const circumference = 2 * Math.PI * 40;
+            const offset = circumference - (percent / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        // Inicializar el círculo en 0
+        calculateScore();
     </script>
 </body>
 </html>
