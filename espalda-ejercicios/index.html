@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<!-- CAMBIA AQUÍ: Cambia "dark" por "light" para pasar a modo claro instantáneamente -->
-<html lang="es" data-theme="dark">
+<!-- CAMBIA AQUÍ: Cambia "dark" por "light" para pasar a modo claro con contraste perfecto -->
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rutina de Espalda Definitiva - BEFITT</title>
     <style>
         /* ==========================================================================
-           1. VARIABLES DE COLOR (Aquí se controla todo el tema visual)
+           1. VARIABLES DE COLOR OPTIMIZADAS CON ALTO CONTRASTE
            ========================================================================== */
         
-        /* MODO OSCURO (Por defecto si data-theme="dark") */
+        /* MODO OSCURO */
         [data-theme="light"] {
             --bg-body: #080808;
             --bg-card: #121212;
@@ -25,26 +25,36 @@
             --circle-bg: #1c1c1e;
             --checkmark-border: #3a3a3c;
             --input-checked-bg: rgba(255, 51, 51, 0.04);
+            --card-shadow: none;
+            
+            /* En modo oscuro el logo se ve tal cual es (blanco/gris claro) */
+            --logo-filter: none;
         }
 
-        /* MODO CLARO (Se activa automáticamente al cambiar a data-theme="light") */
+        /* MODO CLARO - CORREGIDO CON CONTRASTE Y SOMBRAS */
         [data-theme="light"] {
-            --bg-body: #f9f9fb;
-            --bg-card: #ffffff;
-            --bg-input: #f2f2f7;
-            --border-color: #e5e5ea;
-            --border-input: #e5e5ea;
+            --bg-body: #f4f4f7;        /* Un gris de fondo ligeramente más oscuro para contrastar */
+            --bg-card: #ffffff;        /* Tarjetas blancas puras */
+            --bg-input: #f8f8fa;       /* Entradas gris claro */
+            --border-color: #e2e2e9;   /* Bordes definidos y visibles */
+            --border-input: #e2e2e9;
             
-            --text-main: #1c1c1e;
+            --text-main: #121212;      /* Negro premium para máxima lectura */
             --text-secondary: #2c2c2e;
             --text-muted: #636366;
             
-            --circle-bg: #e5e5ea;
-            --checkmark-border: #c7c7cc;
+            --circle-bg: #e5e5ea;      /* Círculo de progreso gris visible */
+            --checkmark-border: #a9a9b3;
             --input-checked-bg: rgba(255, 51, 51, 0.05);
+            
+            /* Sombra suave y elegante para separar las tarjetas del fondo */
+            --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            
+            /* Convierte el logotipo gris/blanco a negro sólido para el fondo claro */
+            --logo-filter: brightness(0) saturate(100%) invert(8%) sepia(8%) saturate(1008%) hue-rotate(201deg) brightness(95%) contrast(93%);
         }
 
-        /* Colores constantes que no cambian de tono */
+        /* Colores constantes */
         :root {
             --brand-red: #ff3333;
             --brand-red-hover: #e62e2e;
@@ -60,7 +70,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transición suave al cambiar */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         body {
@@ -117,12 +127,13 @@
             color: var(--text-main);
         }
 
-        /* Logo BEFITT - Optimizado y Grande */
+        /* Logo BEFITT - Auto-adaptable por filtro */
         .brand-logo {
             height: 45px;
             width: auto;
             max-width: 130px;
             object-fit: contain;
+            filter: var(--logo-filter);
         }
 
         /* Badge */
@@ -161,10 +172,11 @@
             margin-bottom: 30px;
         }
 
-        /* Widget del Score */
+        /* Widget del Score - Corregido con borde y sombra visible */
         .score-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
             border-radius: 18px;
             padding: 24px;
             display: flex;
@@ -177,6 +189,7 @@
             position: relative;
             width: 90px;
             height: 90px;
+            flex-shrink: 0;
         }
 
         .score-circle-svg {
@@ -243,10 +256,11 @@
             line-height: 1.3;
         }
 
-        /* Módulos de Checklist */
+        /* Módulos de Checklist - Corregido con borde y sombra visible */
         .module-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
             border-radius: 18px;
             padding: 24px;
             margin-bottom: 24px;
@@ -310,7 +324,7 @@
             margin-bottom: 20px;
         }
 
-        /* Inputs interactivos (Estilo Checklist) */
+        /* Inputs interactivos */
         .option-row {
             display: flex;
             align-items: flex-start;
